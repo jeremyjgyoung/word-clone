@@ -9,13 +9,26 @@ const answer = sample(WORDS);
 console.info({ answer });
 
 function Game() {
+  const [currInput, setCurrInput] = React.useState("");
+  const [guessArr, setGuessArr] = React.useState([]);
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    setGuessArr([...guessArr, currInput]);
+    console.log("Guess: ", currInput);
+    setCurrInput("");
+  };
+
   return (
     <>
-      <form>
-        <form class="guess-input-wrapper">
-          <label for="guess-input">Enter guess:</label>
-          <input id="guess-input" type="text" />
-        </form>
+      <form className="guess-input-wrapper" onSubmit={submitHandler}>
+        <label htmlFor="guess-input">Enter guess:</label>
+        <input
+          id="guess-input"
+          type="text"
+          value={currInput}
+          onChange={(e) => setCurrInput(e.target.value)}
+        />
       </form>
     </>
   );
