@@ -14,8 +14,9 @@ function Game() {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    setGuessArr([...guessArr, currInput]);
-    console.log("Guess: ", currInput);
+    const newGuess = currInput.toUpperCase();
+    setGuessArr([...guessArr, newGuess]);
+    console.log("Guess: ", newGuess);
     setCurrInput("");
   };
 
@@ -26,6 +27,8 @@ function Game() {
         <input
           id="guess-input"
           type="text"
+          pattern="\w{5,5}"
+          required
           value={currInput}
           onChange={(e) => setCurrInput(e.target.value)}
         />
