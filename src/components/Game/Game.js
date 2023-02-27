@@ -1,7 +1,8 @@
 import React from "react";
 
-import { sample } from "../../utils";
+import { sample, range } from "../../utils";
 import { WORDS } from "../../data";
+import { NUM_OF_GUESSES_ALLOWED } from "../../constants";
 
 // Pick a random word on every pageload.
 const answer = sample(WORDS);
@@ -30,6 +31,25 @@ function Game() {
           </p>
         ))}
       </div>
+
+      <div class="guess-results">
+        {range(NUM_OF_GUESSES_ALLOWED).map((rowIndex) => (
+          <p key={rowIndex} className="guess">
+            {range(5).map((colIndex) => (
+              <>
+                {guessArr[colIndex] ? (
+                  <span key={colIndex} className="cell">
+                    T
+                  </span>
+                ) : (
+                  <span key={colIndex} className="cell"></span>
+                )}
+              </>
+            ))}
+          </p>
+        ))}
+      </div>
+
       <form className="guess-input-wrapper" onSubmit={submitHandler}>
         <label htmlFor="guess-input">Enter guess:</label>
         <input
