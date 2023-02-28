@@ -13,6 +13,7 @@ console.info({ answer });
 function Game() {
   const [currInput, setCurrInput] = React.useState("");
   const [guessArr, setGuessArr] = React.useState([]);
+  const [final, setFinal] = React.useState("");
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -25,10 +26,30 @@ function Game() {
     ]);
     console.log("Guess: ", newGuess);
     setCurrInput("");
+    if (newGuess === answer) {
+      setFinal("win");
+    } else if (guessArr.length + 1 >= 6) {
+      setFinal("lose");
+    }
   };
 
   return (
     <>
+      {final === "win" ? (
+        <div className="happy banner">
+          <p>
+            <strong>Congratulations!</strong> Got it in{" "}
+            <strong>{guessArr.length} guesses</strong>.
+          </p>
+        </div>
+      ) : null}
+      {final === "lose" ? (
+        <div className="sad banner">
+          <p>
+            Sorry, the correct answer is <strong>{answer}</strong>.
+          </p>
+        </div>
+      ) : null}
       <div className="guess-results">
         {range(NUM_OF_GUESSES_ALLOWED).map((rowIndex) => (
           <p key={rowIndex} className="guess">
@@ -47,7 +68,6 @@ function Game() {
           </p>
         ))}
       </div>
-
       <form className="guess-input-wrapper" onSubmit={submitHandler}>
         <label htmlFor="guess-input">Enter guess:</label>
         <input
