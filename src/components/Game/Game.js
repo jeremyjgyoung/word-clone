@@ -24,21 +24,21 @@ function Game() {
 
   return (
     <>
-      <div class="guess-results">
+      <div className="guess-results">
         {guessArr.map((word) => (
-          <p class="guess" key={word.id}>
+          <p className="guess" key={word.id}>
             {word.guess}
           </p>
         ))}
       </div>
 
-      <div class="guess-results">
+      <div className="guess-results">
         {range(NUM_OF_GUESSES_ALLOWED).map((rowIndex) => (
           <p key={rowIndex} className="guess">
             {guessArr[rowIndex]
               ? range(5).map((colIndex) => (
                   <span key={colIndex} className="cell">
-                    guessArr[rowIndex].at(colIndex)
+                    {guessArr[rowIndex].guess.at(colIndex)}
                   </span>
                 ))
               : range(5).map((colIndex) => (
