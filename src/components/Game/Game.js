@@ -35,17 +35,15 @@ function Game() {
       <div class="guess-results">
         {range(NUM_OF_GUESSES_ALLOWED).map((rowIndex) => (
           <p key={rowIndex} className="guess">
-            {range(5).map((colIndex) => (
-              <>
-                {guessArr[colIndex] ? (
+            {guessArr[rowIndex]
+              ? range(5).map((colIndex) => (
                   <span key={colIndex} className="cell">
-                    T
+                    guessArr[rowIndex].at(colIndex)
                   </span>
-                ) : (
+                ))
+              : range(5).map((colIndex) => (
                   <span key={colIndex} className="cell"></span>
-                )}
-              </>
-            ))}
+                ))}
           </p>
         ))}
       </div>
@@ -66,3 +64,27 @@ function Game() {
 }
 
 export default Game;
+
+/*
+
+{range(NUM_OF_GUESSES_ALLOWED).map((rowIndex) => (
+          <p key={rowIndex} className="guess">
+            {range(5).map((colIndex) => (
+              <>
+                {guessArr[rowIndex] ? (
+                  rowIndex === colIndex ? (
+                    <span key={colIndex} className="cell">
+                      T
+                    </span>
+                  ) : (
+                    <span key={colIndex} className="cell"></span>
+                  )
+                ) : (
+                  <span key={colIndex} className="cell"></span>
+                )}
+              </>
+            ))}
+          </p>
+        ))}
+
+        */
