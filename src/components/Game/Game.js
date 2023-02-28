@@ -25,14 +25,6 @@ function Game() {
   return (
     <>
       <div className="guess-results">
-        {guessArr.map((word) => (
-          <p className="guess" key={word.id}>
-            {word.guess}
-          </p>
-        ))}
-      </div>
-
-      <div className="guess-results">
         {range(NUM_OF_GUESSES_ALLOWED).map((rowIndex) => (
           <p key={rowIndex} className="guess">
             {guessArr[rowIndex]
