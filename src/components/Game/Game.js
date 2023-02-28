@@ -3,6 +3,7 @@ import React from "react";
 import { sample, range } from "../../utils";
 import { WORDS } from "../../data";
 import { NUM_OF_GUESSES_ALLOWED } from "../../constants";
+import { checkGuess } from "../../game-helpers";
 
 // Pick a random word on every pageload.
 const answer = sample(WORDS);
@@ -17,7 +18,11 @@ function Game() {
     e.preventDefault();
     const guessId = crypto.randomUUID();
     const newGuess = currInput.toUpperCase();
-    setGuessArr([...guessArr, { id: guessId, guess: newGuess }]);
+    const letterCheckedArr = checkGuess(newGuess, answer);
+    setGuessArr([
+      ...guessArr,
+      { id: guessId, guess: newGuess, letterArr: letterCheckedArr },
+    ]);
     console.log("Guess: ", newGuess);
     setCurrInput("");
   };
@@ -28,9 +33,12 @@ function Game() {
         {range(NUM_OF_GUESSES_ALLOWED).map((rowIndex) => (
           <p key={rowIndex} className="guess">
             {guessArr[rowIndex]
-              ? range(5).map((colIndex) => (
-                  <span key={colIndex} className="cell">
-                    {guessArr[rowIndex].guess.at(colIndex)}
+              ? guessArr[rowIndex].letterArr.map((letterObj, index) => (
+                  <span
+                    key={`${guessArr[rowIndex]}${index}`}
+                    className={`cell ${letterObj.status}`}
+                  >
+                    {letterObj.letter}
                   </span>
                 ))
               : range(5).map((colIndex) => (
@@ -78,5 +86,15 @@ export default Game;
             ))}
           </p>
         ))}
+
+
+        range(5).map((colIndex) => (
+                {guessArr[rowIndex].letterArr.map(letterObj => (
+<span key={colIndex} className="cell">
+                    {guessArr[rowIndex].guess.at(colIndex)}
+                  </span>
+                ))}
+
+
 
         */
