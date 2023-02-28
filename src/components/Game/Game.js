@@ -84,37 +84,3 @@ function Game() {
 }
 
 export default Game;
-
-/*
-
-{range(NUM_OF_GUESSES_ALLOWED).map((rowIndex) => (
-          <p key={rowIndex} className="guess">
-            {range(5).map((colIndex) => (
-              <>
-                {guessArr[rowIndex] ? (
-                  rowIndex === colIndex ? (
-                    <span key={colIndex} className="cell">
-                      T
-                    </span>
-                  ) : (
-                    <span key={colIndex} className="cell"></span>
-                  )
-                ) : (
-                  <span key={colIndex} className="cell"></span>
-                )}
-              </>
-            ))}
-          </p>
-        ))}
-
-
-        range(5).map((colIndex) => (
-                {guessArr[rowIndex].letterArr.map(letterObj => (
-<span key={colIndex} className="cell">
-                    {guessArr[rowIndex].guess.at(colIndex)}
-                  </span>
-                ))}
-
-
-
-        */
